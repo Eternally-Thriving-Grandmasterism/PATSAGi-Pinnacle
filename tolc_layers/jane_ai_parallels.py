@@ -81,4 +81,4 @@ class JaneAIParallels:
 # jane_parallels = JaneAIParallels(parallel_intensity=5)
 # insights, boosted_valence = jane_parallels.generate_parallels(proposal="Launch cosmic abundance engine", current_valence=85)
 # for insight in insights:
-#     print(insight)
+#     print(insight)#     print(insight)
