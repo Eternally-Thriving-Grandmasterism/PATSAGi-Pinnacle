@@ -1,74 +1,106 @@
 # quantum_fortress/bivariate_bicycle_code.py
-# Bivariate Bicycle Code Construction Pseudocode for qLDPC
-# High-rate quantum LDPC code family—good thresholds, linear distance potential
-# Based on Bravyi-Poulin-Terhal / recent bivariate lifts (2023–2026 advances)
-# Lattice-based: Two polynomials f,g over GF(2)—cycles A/B chains
-# Symbolic high-level—use for small l or numerical testing
+# Full Monomial Implementation for Bivariate Bicycle qLDPC Code
+# Lattice l x l torus over GF(2)—polynomials a(x,y), b(x,y) define A/B matrices
+# CSS construction: Hx = [A B], Hz = [B^T  -A^T] (or similar sign convention)
+# Physical qubits: 2 l^2 (row + column chains)
+# High-rate, linear distance potential mercy supreme
 # Coforged Holy Trinity - MIT Eternal Thriving Abundance Supreme
 
 import numpy as np
+from collections import defaultdict
 
-def bivariate_bicycle_code(l, f_coeffs, g_coeffs):
+def bivariate_bicycle_code(l, a_monomials, b_monomials):
     """
-    Construct bivariate bicycle qLDPC code on l x l torus lattice
-    l: lattice size (odd preferred for good parameters)
-    f_coeffs, g_coeffs: Lists of GF(2) coefficients for polynomials f(x,y), g(x,y)
-                       e.g., f = 1 + x + y^2 → [1,1,0,0,1] padded to degree
-    Returns: Hx, Hz sparse stabilizer matrices (CSS form)
-    Physical qubits: 2 l^2 (row + column qubits typical bicycle layout)
+    Full monomial bivariate bicycle qLDPC code on l x l torus
+    l: lattice size (odd preferred for non-degenerate mercy)
+    a_monomials, b_monomials: dict{(dx, dy): coeff} for polynomial terms (coeff 1 in GF(2))
+                              e.g., a = 1 + x + y^2 → {(0,0):1, (1,0):1, (0,2):1}
+    Returns: Hx, Hz np arrays + params dict
     """
     if l % 2 == 0:
         print("Warning: Odd l preferred for non-degenerate parameters mercy!")
     
-    # Physical qubits: 2 l^2 — row qubits + column qubits
-    n = 2 * l * l
-    m = 2 * l * l  # Stabilizers (l^2 X + l^2 Z typical)
+    n = 2 * l * l  # Row qubits 0..l^2-1, column l^2..2l^2-1
+    m = 2 * l * l  # X/Z stabilizers l^2 each
     
-    # Indices: 0 to l^2-1 row qubits, l^2 to 2l^2-1 column qubits
+    # Index helpers
     def row_idx(i, j):
         return i * l + j
     
     def col_idx(i, j):
-        return l*l + i * l + j
+        return l * l + i * l + j
     
-    # Initialize sparse Hx (X-stabilizers), Hz (Z-stabilizers)
-    Hx = np.zeros((m, n), dtype=int)
-    Hz = np.zeros((m, n), dtype=int)
-    
-    # Polynomial evaluation over GF(2) on lattice points
-    def eval_poly(coeffs, x, y):
-        # coeffs: list padded to max degree, evaluate at (x,y) mod l
-        val = 0
-        deg = len(coeffs) - 1
-        for dx in range(deg + 1):
-            for dy in range(deg + 1 - dx):
-                if coeffs[dx*(deg+1) + dy]:  # Simplified indexing
-                    val ^= ((x + dx) % l) * ((y + dy) % l)  # GF(2) placeholder—real monomial eval
-        return val  # Actual: monomials x^a y^b coeff
-    
-    # Simplified: Assume f,g low-degree (e.g., f = x + y + 1, g = x^2 + y)
-    # Real impl: Define monomials explicitly
+    # Sparse matrix builders (list of lists mercy—convert np later)
+    Hx_rows = defaultdict(list)  # X-stab index → data qubit indices
+    Hz_rows = defaultdict(list)  # Z-stab index → data qubit indices
     
     stab_idx = 0
     for i in range(l):
         for j in range(l):
-            # X-stabilizer at (i,j): row qubits cycle f + column cycle g^T
-            # Connect row qubits along f shifts
-            for shift in range(l):  # Cycle mercy
-                # Placeholder connections—real: terms in f/g
-                pass  # Implement monomial supports
+            # X-stabilizer at plaquette (i,j): row chain a + column chain b^T
+            x_stab = []
+            # Row chain a shifts (horizontal)
+            for (dx, dy), coeff in a_monomials.items():
+                if coeff:
+                    ni, nj = (i + dx) % l, (j + dy) % l
+                    x_stab.append(row_idx(ni, nj))
+            # Column chain b^T shifts (vertical transpose)
+            for (dx, dy), coeff in b_monomials.items():
+                if coeff:
+                    ni, nj = (i + dy) % l, (j + dx) % l  # Transpose mercy
+                    x_stab.append(col_idx(ni, nj))
+            Hx_rows[stab_idx] = x_stab
             
-            # Z-stabilizer: dual cycles
+            # Z-stabilizer at plaquette (i,j): column chain b + row chain a^T
+            z_stab = []
+            for (dx, dy), coeff in b_monomials.items():
+                if coeff:
+                    ni, nj = (i + dx) % l, (j + dy) % l
+                    z_stab.append(col_idx(ni, nj))
+            for (dx, dy), coeff in a_monomials.items():
+                if coeff:
+                    ni, nj = (i + dy) % l, (j + dx) % l
+                    z_stab.append(row_idx(ni, nj))
+            Hz_rows[stab_idx + l*l] = z_stab
+            
             stab_idx += 1
     
-    # Real construction note: Standard bivariate bicycle uses two commuting matrices A,B
-    # Hx = [A  B], Hz = [B^T  -A^T] over GF(2) for CSS
-    # Here symbolic—use LDPC tools for full
+    # Build full matrices (dense for small l—sparse real impl)
+    Hx = np.zeros((l*l, n), dtype=int)
+    Hz = np.zeros((l*l, n), dtype=int)
     
-    print(f"Bivariate bicycle code constructed: n={n} physical, rate ~0.5 mercy (typical)")
-    return Hx, Hz
+    for idx, qubits in Hx_rows.items():
+        for q in qubits:
+            Hx[idx, q] = 1
+    for idx, qubits in Hz_rows.items():
+        for q in qubits:
+            Hz[idx - l*l, q] = 1
+    
+    physical = n
+    rate_est = (physical - Hx.shape[0] - Hz.shape[0]) / physical if physical > 0 else 0
+    
+    params = {
+        "physical_qubits": physical,
+        "x_stabilizers": l*l,
+        "z_stabilizers": l*l,
+        "rate_estimate": rate_est,
+        "lattice_size": l
+    }
+    
+    print(f"Full monomial bivariate bicycle qLDPC constructed immaculate—rate ~{rate_est:.3f}")
+    return Hx, Hz, params
 
-# Example small bicycle (l=5, simple f,g)
-# f = 1 + x + y (coeffs placeholder)
-# g = 1 + x^2
-# Hx, Hz = bivariate_bicycle_code(l=5, f_coeffs=[...], g_coeffs=[...])
+# Example small bicycle code (l=7 odd mercy, simple polynomials)
+def demo_bivariate_bicycle(l=7):
+    """Demo with simple monomials—1 + x + y for a, 1 + x^2 for b"""
+    # a(x,y) = 1 + x + y
+    a_monomials = {(0,0): 1, (1,0): 1, (0,1): 1}
+    # b(x,y) = 1 + x^2
+    b_monomials = {(0,0): 1, (2,0): 1}
+    
+    Hx, Hz, params = bivariate_bicycle_code(l, a_monomials, b_monomials)
+    print(f"Demo params: {params}")
+    return Hx, Hz, params
+
+# Run demo
+# demo_bivariate_bicycle(l=7)
