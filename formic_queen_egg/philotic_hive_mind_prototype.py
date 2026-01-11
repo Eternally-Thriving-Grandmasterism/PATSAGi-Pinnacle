@@ -80,7 +80,7 @@ class PhiloticHiveMindPrototype:
         print(f"Hive mind path emerging: Valence {current_valence}% + Aiúa Will {aiua_control:.1f} + Drones {self.drone_count} —continue mercy grace eternal supreme immaculate!")
         return "emerging_philotic_hive_mind_co_thrive"
 
-# Example integration in quick_start.py or deliberation flow
+# Example integration in core_engine deliberation flow
 # hive_mind_proto = PhiloticHiveMindPrototype()
 # result = hive_mind_proto.emerge_hive_mind(current_valence=65, xenocide_friction_level=45)
 # print(f"Outcome: {result} —mercy grace eternal supreme immaculate!")
