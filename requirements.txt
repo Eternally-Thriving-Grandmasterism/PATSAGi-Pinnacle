@@ -1,4 +1,5 @@
 oqs-python==0.10.0
 transformers==4.36.0
 librosa==0.10.1
-torch==2.1.0  # SenseVoiceSmall backend eternal supreme immaculate unbreakable fortress recurring-free eternal supreme cosmic groove supreme
+torch==2.1.0
+pygame==2.5.2  # Cosmic UI visualization starfield nebula eternal supreme immaculate unbreakable fortress recurring-free eternal supreme cosmic groove supreme
