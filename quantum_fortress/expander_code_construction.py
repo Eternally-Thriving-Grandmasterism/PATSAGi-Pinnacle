@@ -1,40 +1,81 @@
 # quantum_fortress/expander_code_construction.py
-# Pseudocode for Quantum Expander Code Construction
-# Hypergraph Product of two classical expander codes → CSS qLDPC
-# Symbolic high-level—use real libraries (e.g., LDPC Python package) for production
+# Corrected Quantum Expander Code Construction (Hypergraph Product)
+# Fixed block matrix syntax for proper CSS qLDPC structure
+# Hypergraph product: Hx = [H1 ⊗ I  |  I ⊗ H2^T], Hz = [I ⊗ H2  |  H1^T ⊗ I]
 # Coforged Holy Trinity - MIT Eternal Thriving Abundance Supreme
 
 import numpy as np
-import random  # Grace RNG for random expanders (or use Cayley/ Ramanujan graphs)
+import random  # Grace RNG for random expanders
 
-def generate_classical_expander_parity_check(n, d_left, d_right, seed=None):
+def generate_classical_expander_parity_check(n_vars, d_check, d_var, seed=None):
     """
     Generate sparse parity-check matrix H for classical bipartite expander
-    n: number of variable nodes
-    d_left: degree left (check nodes)
-    d_right: degree right (variable nodes)
-    Returns: H (m x n) sparse matrix (m check nodes)
+    n_vars: number of variable nodes
+    d_check: regular degree of check nodes
+    d_var: regular degree of variable nodes (approx)
+    Returns: H (m_checks x n_vars) sparse matrix
     """
     if seed:
         random.seed(seed)
     
-    m = int(n * d_right / d_left)  # Balance for regular/semi-regular
+    m_checks = int(n_vars * d_var / d_check)  # Balanced for regular
     
-    # Simple random regular bipartite expander (Tanner graph)
-    H = np.zeros((m, n), dtype=int)
+    H = np.zeros((m_checks, n_vars), dtype=int)
     
-    # Left-regular: Each check connects d_left variables
-    for i in range(m):
-        variables = random.sample(range(n), d_left)
+    # Simple random regular (left-regular exact, right approx)
+    for i in range(m_checks):
+        variables = random.sample(range(n_vars), d_check)
         for j in variables:
             H[i, j] = 1
     
-    # Ensure right-regular-ish (or use configuration model for exact)
-    print(f"Classical expander H generated: {m} checks x {n} variables, degrees {d_left}/{d_right}")
+    print(f"Classical expander H generated: {m_checks} checks x {n_vars} vars, degrees ~{d_check}/{d_var}")
     return H
 
 def hypergraph_product_code(H1, H2):
     """
+    Hypergraph product of two classical parity-check matrices H1 (m1 x n1), H2 (m2 x n2)
+    Produces quantum CSS expander code:
+    Hx = [H1 ⊗ I_{n2}    I_{m1} ⊗ H2^T]
+    Hz = [I_{n1} ⊗ H2    H1^T ⊗ I_{m2}]
+    Physical qubits n = n1*n2 + m1*m2
+    Returns: Hx, Hz as numpy arrays
+    """
+    m1, n1 = H1.shape      # H1: m1 checks, n1 variables
+    m2, n2 = H2.shape
+    
+    # Kronecker products mercy
+    H1_I = np.kron(H1, np.eye(n2))
+    I_H2T = np.kron(np.eye(m1), H2.T)
+    
+    I_H2 = np.kron(np.eye(n1), H2)
+    H1T_I = np.kron(H1.T, np.eye(m2))
+    
+    # Block matrices—horizontal concatenation (1 row, 2 columns each)
+    Hx = np.hstack((H1_I, I_H2T))      # Shape: (m1*n2) x (n1*n2 + m1*m2)
+    Hz = np.hstack((I_H2, H1T_I))      # Shape: (n1*m2) x (n1*n2 + m1*m2)
+    
+    physical_qubits = Hx.shape[1]
+    print(f"Quantum expander code constructed immaculate:")
+    print(f"  Hx shape: {Hx.shape} (X-stabilizers)")
+    print(f"  Hz shape: {Hz.shape} (Z-stabilizers)")
+    print(f"  Physical qubits: {physical_qubits}")
+    print(f"  Estimated rate: ~{(physical_qubits - Hx.shape[0] - Hz.shape[0]) / physical_qubits:.3f} (approx)")
+    
+    return Hx, Hz
+
+# Example usage for small qLDPC expander code
+def demo_expander_code(n_vars=12, d_check=3, d_var=6):
+    """Demo small quantum expander code construction"""
+    random.seed(42)  # Mercy reproducibility
+    
+    H1 = generate_classical_expander_parity_check(n_vars, d_check, d_var)
+    H2 = generate_classical_expander_parity_check(n_vars, d_check, d_var)  # Symmetric grace
+    
+    Hx, Hz = hypergraph_product_code(H1, H2)
+    return Hx, Hz
+
+# Run demo
+# Hx, Hz = demo_expander_code(n_vars=12)    """
     Hypergraph product of two classical parity-check matrices H1, H2
     Produces quantum CSS code: Hx = [H1 ⊗ I  |  I ⊗ H2^T], Hz = [I ⊗ H2  |  H1^T ⊗ I]
     Returns: Hx, Hz (stabilizer matrices for X/Z checks)
