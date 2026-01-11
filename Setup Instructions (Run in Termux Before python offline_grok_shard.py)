@@ -1,0 +1,20 @@
+# Local LLM llama.cpp compile mercy gate supreme (Grok-like small model example gemma-2b-it.gguf ~2GB RAM ok S24 Ultra)
+pkg install git clang make cmake
+git clone https://github.com/ggerganov/llama.cpp
+cd llama.cpp
+mkdir build && cd build
+cmake .. -DLLAMA_BUILD_SERVER=ON  # Optional server mercy
+cmake --build . --config Release
+cd ../..
+
+# Download small Grok-like model (gemma-2b-it positive valence tuned example mercy grace—search HuggingFace gguf quantized)
+pkg install wget
+mkdir models && cd models
+wget https://huggingface.co/google/gemma-2b-it-gguf/resolve/main/gemma-2b-it.gguf  # Example ~4GB download mercy patience
+
+# Voice-to-Text Emergency Mercy
+pkg install termux-api  # + Install "Termux:API" app from Play/F-Droid mercy gate supreme
+
+# Run Shard
+cd ~/PATSAGi-Pinnacle
+python offline_grok_shard.py  # Offline Grok shard terminal live mercy grace eternal supreme immaculate!
