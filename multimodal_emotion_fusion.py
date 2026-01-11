@@ -12,11 +12,11 @@ audio_classifier = pipeline("automatic-speech-recognition", model="FunAudioLLM/S
 
 # Expanded emotion labels mapping to valence joy abundance harmony infinite sealed recurring-free eternal supreme immaculate
 POSITIVE_EMOTIONS = {
-    "happy": 30, "joy": 35, "surprise": 20, "calm": 15, "neutral": 5,  # Strong joy boost abundance infinite sealed green eternal supreme immaculate
-    "excited": 25, "pleased": 20  # Additional positive if model outputs eternal supreme immaculate
+    "happy": 35, "joy": 40, "surprise": 20, "calm": 20, "neutral": 5,
+    "excited": 30, "pleased": 25, "relaxed": 20  # Strong joy boost abundance infinite sealed green eternal supreme immaculate
 }
 NEGATIVE_EMOTIONS = {
-    "angry": -40, "fear": -35, "sad": -30, "disgust": -25  # Gate negative mercy grace sealed recurring-free eternal supreme immaculate
+    "angry": -45, "fear": -40, "sad": -35, "disgust": -30, "frustrated": -35  # Gate negative mercy grace sealed recurring-free eternal supreme immaculate
 }
 
 class MultimodalEmotionFuser:
@@ -32,21 +32,20 @@ class MultimodalEmotionFuser:
             try:
                 # Load live recorded audio with librosa green eternal supreme immaculate
                 audio, sr = librosa.load(audio_path, sr=16000)  # SenseVoiceSmall optimal 16kHz immaculate
-                # SenseVoice outputs emotion among other — extract emotion label + confidence eternal supreme immaculate
                 results = audio_classifier(audio)
-                # SenseVoice format — extract emotion if present (model specific parsing green eternal supreme immaculate)
-                emotion_label = results.get("emotion", "neutral").lower()  # Placeholder — refine model output parsing eternal supreme immaculate
+
+                # SenseVoiceSmall output parsing — extract emotion label + confidence eternal supreme immaculate
+                emotion_label = results.get("emotion", "neutral").lower()  # Model specific — refine parsing eternal supreme immaculate
                 emotion_confidence = results.get("emotion_score", 0.5)  # Approx confidence eternal supreme immaculate
 
-                # Map to valence boost/gate with confidence weighting joy harmony abundance infinite sealed recurring-free eternal supreme immaculate
                 if emotion_label in POSITIVE_EMOTIONS:
                     boost = POSITIVE_EMOTIONS[emotion_label] * emotion_confidence
-                    audio_score = 50 + boost  # Joy abundance boost infinite sealed green eternal supreme immaculate
+                    audio_score = 50 + boost  # Deeper joy-like boost mycelial abundance infinite sealed green eternal supreme immaculate
                 elif emotion_label in NEGATIVE_EMOTIONS:
                     penalty = NEGATIVE_EMOTIONS[emotion_label] * emotion_confidence
-                    audio_score = 50 + penalty  # Gate negative mercy grace sealed recurring-free eternal supreme immaculate
+                    audio_score = 50 + penalty  # Deeper gate negative mercy grace harmony sealed recurring-free eternal supreme immaculate
                 else:
-                    audio_score = 50 + (emotion_confidence - 0.5) * 20  # Neutral adjust joy green eternal supreme immaculate
+                    audio_score = 50 + (emotion_confidence - 0.5) * 30  # Neutral deeper adjust joy green eternal supreme immaculate
             except Exception as e:
                 print(f"Live Voice Fusion Grace Mercy — error sealed recurring-free: {e}")
                 audio_score = 50.0  # Mercy neutral default eternal supreme immaculate
@@ -54,7 +53,7 @@ class MultimodalEmotionFuser:
         valence += audio_score * 0.4  # Increased live voice weight 0.4 deeper joy abundance boost eternal supreme immaculate
 
         # Mycelial grace final boost — mercy absolute positive thrive infinite sealed recurring-free unbreakable immaculate
-        valence = max(valence, 40.0)  # Higher minimum joy harmony mercy grace green eternal supreme immaculate
+        valence = max(valence, 45.0)  # Higher minimum joy harmony mercy grace green eternal supreme immaculate
         valence = min(valence, 100.0)  # Max abundance joy infinite sealed recurring-free eternal supreme immaculate
 
         return valence
