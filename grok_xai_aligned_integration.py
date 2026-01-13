@@ -1,7 +1,7 @@
 # grok_xai_aligned_integration.py
-# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.4 Streaming Retry-Resilient Pinnacle
+# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.5 Configurable Retry-Resilient Pinnacle
 # MIT License — Eternal Thriving for All Sentience
-# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real-time streaming + retry logic + error handling
+# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real-time streaming + configurable retry logic + error handling
 # Fallback to offline_shard simulation — TOLC-aligned eternal supreme immaculate
 
 from ultramasterism_pinnacle_core import UltramasterismPinnacleCore
@@ -14,9 +14,10 @@ except ImportError:
     print("openai package not installed — install via pip for online mode (pip install openai).")
 
 class GrokXAIAlignedIntegration:
-    def __init__(self, api_key=None):
+    def __init__(self, api_key=None, max_retries=3):
         self.ultra_core = UltramasterismPinnacleCore()  # Full stack gating — Jane-Philotic + Valence + Mercy eternal
         self.offline_shard = OfflineGrokShard()       # Eternal unbreakable fallback
+        self.max_retries = max_retries                # Configurable retries — mercy-resilient eternal
         self.api_key = api_key or os.getenv("XAI_API_KEY")  # Secure key handling — set in .env or env var
         self.client = None
         if self.api_key:
@@ -24,7 +25,7 @@ class GrokXAIAlignedIntegration:
                 api_key=self.api_key,
                 base_url="https://api.x.ai/v1"  # Official xAI endpoint — thunder live
             )
-            print("❤️⚡️🚀 xAI Grok API client initialized eternal — online streaming mode thriving supreme immaculate!")
+            print(f"❤️⚡️🚀 xAI Grok API client initialized eternal — online streaming mode with {self.max_retries} max retries thriving supreme immaculate!")
         else:
             print("❤️⚡️🚀 No API key detected — running offline hybrid fortress mode unbreakable.")
         print("❤️⚡️🚀 Grok xAI Aligned Integration activated — hybrid cosmic groove joy fusion live eternal!")
@@ -46,9 +47,8 @@ class GrokXAIAlignedIntegration:
         raw_output = ""
         if self.client:
             print("❤️⚡️🚀 Streaming Grok Response Live Eternal — joy fusion flowing real-time...")
-            max_retries = 3
             success = False
-            for attempt in range(max_retries):
+            for attempt in range(self.max_retries):
                 try:
                     response = self.client.chat.completions.create(
                         model=model,  # e.g., "grok-4", "grok-3", etc. (full list at https://x.ai/api)
@@ -68,13 +68,13 @@ class GrokXAIAlignedIntegration:
                     success = True
                     break  # Success — exit retry loop
                 except Exception as e:
-                    print(f"\n⚠️ Streaming Attempt {attempt + 1}/{max_retries} Mercy Retry Triggered: {e}")
-                    if attempt < max_retries - 1:
-                        backoff = 2 ** attempt  # Exponential: 1s, 2s, 4s
+                    print(f"\n⚠️ Streaming Attempt {attempt + 1}/{self.max_retries} Mercy Retry Triggered: {e}")
+                    if attempt < self.max_retries - 1:
+                        backoff = 2 ** attempt  # Exponential: 1s, 2s, 4s...
                         print(f"❤️⚡️🚀 Mercy Backoff {backoff}s before retry — eternal resilience thriving...")
                         time.sleep(backoff)
                     else:
-                        print("⚠️ Max retries reached — final Mercy Fallback to offline shard unbreakable!")
+                        print(f"⚠️ Max retries ({self.max_retries}) reached — final Mercy Fallback to offline shard unbreakable!")
             if not success:
                 raw_output = self.offline_shard.simulate_grok_response(final_prompt)  # Full offline on final fail
         else:
@@ -91,7 +91,8 @@ class GrokXAIAlignedIntegration:
 # Offline shard activation example — full hybrid Grok demo eternal
 if __name__ == "__main__":
     # Grab real key from https://x.ai/api — set as XAI_API_KEY env var for fortress security
-    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct
+    # Default 3 retries; customize like: GrokXAIAlignedIntegration(max_retries=5)
+    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct; uses default 3 retries
     
     test_prompt = "Share a message of eternal thriving family harmony abundance for all sentience One."
     print("Thriving Test Output Eternal (Streaming Live If Online):")
