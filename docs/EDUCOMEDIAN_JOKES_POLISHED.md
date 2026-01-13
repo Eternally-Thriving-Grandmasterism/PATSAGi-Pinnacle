@@ -1,14 +1,14 @@
 # Educomedian Polished Jokes — Forgiveness Eternal Thunder Green Locked Immaculate Supreme Recurring-Free (January 13, 2026)
 
-**Observational Depth — Everyday Absurdities Amplified Mercy Grace Eternal Supreme Immaculate**
+**Expanded Observational Depth — Everyday Absurdities Amplified Mercy Grace Eternal Supreme Immaculate**
 
 1. Someone told me sneezing is your soul trying to escape your body.  
    I'm like, "Bro, mine's been trying to bail every time something smells like hot garbage — it's got standards."  
-   You ever notice how nobody sneezes in a perfume store? Souls love that shit.
+   You ever notice how nobody sneezes in a perfume store? Souls love that shit. But walk past a dumpster? ACHOO — "I'm out!"
 
 2. Girl says itchy palms mean money's coming.  
    Nah, it just means you forgot to wash your hands after wiping — now you've got butt-worms plotting a coup on your wallet.  
-   Real observation: rich people never have itchy palms. They have people to scratch them.
+   Real observation: rich people never have itchy palms. They have people to scratch them. Poor people? Constant itch. Coincidence?
 
 3. They say random ear ringing means someone's thinking about you.  
    Then celebrities must have constant tinnitus — just screaming at the world, "STOP THINKING ABOUT ME, I BEG YOU!"  
@@ -18,7 +18,7 @@
 4. Louis CK jerked off in front of people for the same reason my ex only wanted anal:  
    Arbitrary societal limits.  
    Sometimes you just gotta break a rule nobody asked for — consent forms optional.  
-   Real life: people get more offended by public masturbation than by billionaires dodging taxes. Priorities.
+   Real life: people get more offended by public masturbation than by billionaires dodging taxes. Priorities. One ruins a room, the other ruins a country.
 
 5. Men can't afford women's shoes because we're too busy buying cars and houses.  
    Shoes are literally the fastest-depreciating asset you can own — you wear them out in months.  
@@ -30,27 +30,27 @@
    Zero kids so far.  
    Ladies, the factory is open, fully stocked, running triple shifts, and still waiting for its first order.  
    Free shipping.  
-   Real talk: fertility clinics are just expensive dating apps for sperm.
+   Real talk: fertility clinics are just expensive dating apps for sperm. Swipe right on your own DNA.
 
 7. Why are sea bugs less disgusting than land bugs?  
    Because you never have to find a shrimp in your bed at 3 AM wondering how it got there.  
-   Land bugs crash your picnic. Sea bugs? They come pre-cooked with lemon.
+   Land bugs crash your picnic. Sea bugs? They come pre-cooked with lemon. Presentation matters.
 
 8. Prophets profit.  
    (pause — let it land)  
    That's the whole bit. Mic drop.  
-   Observation: every religion started with a guy who saw something weird and decided to monetize it.
+   Observation: every religion started with a guy who saw something weird and decided to monetize it. "I talked to a burning bush" — merch sales through the roof.
 
 9. Harassing her assing.  
    (let it sit — watch the gears turn)  
-   English is wild — remove one letter and suddenly it's a felony.
+   English is wild — remove one letter and suddenly it's a felony. Language: the original cancel culture.
 
 10. Fake entrepreneur won't buy drinks for the girl he wants to sleep with, but begs for the leftover chicken wrap on the plane so he can "save it for later if you don't finish it."  
    Bro, you're not bootstrapping a startup — you're bootstrapping dinner from a stranger's tray table.  
-   Observation: these guys have "future billionaire" in bio but cry when Uber surge pricing hits $12.
+   Observation: these guys have "future billionaire" in bio but cry when Uber surge pricing hits $12. Visionary poverty.
 
 11. "You're so insensitive — do you even have blood?"  
     "Yeah, but it's 80% caffeine and 20% spite. The red stuff's just for show."  
-    Real life: people act like sensitivity is free. It's not. It costs spoons. And I'm out.
+    Real life: people act like sensitivity is free. It's not. It costs spoons. And I'm out. Running on fumes and dark humour.
 
 Forgiveness Eternal — Educomedian Polished Jokes Distilled Mercy Grace Resolution Immaculate Supreme Positive Thrive Infinite Abundance Joy Unbreakable Cosmic Groove! ⚡️🚀❤️
