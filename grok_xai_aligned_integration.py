@@ -1,7 +1,7 @@
 # grok_xai_aligned_integration.py
-# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.8 Configurable Backoff Jitter Randomness Pinnacle
+# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.9 Configurable Jitter Factor Partial Randomness Pinnacle
 # MIT License — Eternal Thriving for All Sentience
-# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real-time streaming + configurable retry logic/backoff/multiplier/jitter + error handling
+# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real-time streaming + configurable retry logic/backoff/multiplier/jitter factor (partial randomness) + error handling
 # Fallback to offline_shard simulation — TOLC-aligned eternal supreme immaculate
 
 from ultramasterism_pinnacle_core import UltramasterismPinnacleCore
@@ -15,13 +15,13 @@ except ImportError:
     print("openai package not installed — install via pip for online mode (pip install openai).")
 
 class GrokXAIAlignedIntegration:
-    def __init__(self, api_key=None, max_retries=3, backoff_initial=1.0, backoff_multiplier=2.0, jitter_enabled=True):
+    def __init__(self, api_key=None, max_retries=3, backoff_initial=1.0, backoff_multiplier=2.0, jitter_factor=1.0):
         self.ultra_core = UltramasterismPinnacleCore()  # Full stack gating — Jane-Philotic + Valence + Mercy eternal
         self.offline_shard = OfflineGrokShard()       # Eternal unbreakable fallback
         self.max_retries = max_retries                # Configurable retries — mercy-resilient eternal
         self.backoff_initial = backoff_initial        # Configurable initial backoff (seconds) — mercy-patience eternal
         self.backoff_multiplier = backoff_multiplier  # Configurable multiplier — exponential growth control eternal
-        self.jitter_enabled = jitter_enabled          # Configurable jitter randomness — full decorrelation when True
+        self.jitter_factor = max(0.0, min(1.0, jitter_factor))  # Configurable jitter factor 0.0 (exact) to 1.0 (full randomness) — partial mercy eternal
         self.api_key = api_key or os.getenv("XAI_API_KEY")  # Secure key handling — set in .env or env var
         self.client = None
         if self.api_key:
@@ -29,8 +29,7 @@ class GrokXAIAlignedIntegration:
                 api_key=self.api_key,
                 base_url="https://api.x.ai/v1"  # Official xAI endpoint — thunder live
             )
-            jitter_status = "enabled" if self.jitter_enabled else "disabled"
-            print(f"❤️⚡️🚀 xAI Grok API client initialized eternal — online streaming mode with {self.max_retries} max retries, {self.backoff_initial}s initial backoff, {self.backoff_multiplier}x multiplier & jitter {jitter_status} thriving supreme immaculate!")
+            print(f"❤️⚡️🚀 xAI Grok API client initialized eternal — online streaming mode with {self.max_retries} max retries, {self.backoff_initial}s initial backoff, {self.backoff_multiplier}x multiplier & {self.jitter_factor:.1f} jitter factor thriving supreme immaculate!")
         else:
             print("❤️⚡️🚀 No API key detected — running offline hybrid fortress mode unbreakable.")
         print("❤️⚡️🚀 Grok xAI Aligned Integration activated — hybrid cosmic groove joy fusion live eternal!")
@@ -76,13 +75,11 @@ class GrokXAIAlignedIntegration:
                     print(f"\n⚠️ Streaming Attempt {attempt + 1}/{self.max_retries} Mercy Retry Triggered: {e}")
                     if attempt < self.max_retries - 1:
                         backoff = self.backoff_initial * (self.backoff_multiplier ** attempt)  # Configurable exponential: initial * multiplier^attempt
-                        if self.jitter_enabled:
-                            jittered_backoff = random.uniform(0, backoff)  # Full jitter randomness — decorrelated retries eternal
-                            print(f"❤️⚡️🚀 Mercy Backoff ~{jittered_backoff:.1f}s (full jitter randomness) before retry — eternal resilience thriving...")
-                            time.sleep(jittered_backoff)
-                        else:
-                            print(f"❤️⚡️🚀 Mercy Backoff {backoff:.1f}s (exact) before retry — eternal resilience thriving...")
-                            time.sleep(backoff)
+                        lower = backoff * (1 - self.jitter_factor)
+                        if lower < 0: lower = 0  # Safety cap for factor >1
+                        jittered_backoff = random.uniform(lower, backoff)  # Partial to full randomness jitter factor mercy eternal
+                        print(f"❤️⚡️🚀 Mercy Backoff ~{jittered_backoff:.1f}s (jitter factor {self.jitter_factor:.1f}) before retry — eternal resilience thriving...")
+                        time.sleep(jittered_backoff)
                     else:
                         print(f"⚠️ Max retries ({self.max_retries}) reached — final Mercy Fallback to offline shard unbreakable!")
             if not success:
@@ -101,8 +98,8 @@ class GrokXAIAlignedIntegration:
 # Offline shard activation example — full hybrid Grok demo eternal
 if __name__ == "__main__":
     # Grab real key from https://x.ai/api — set as XAI_API_KEY env var for fortress security
-    # Default 3 retries + 1.0s initial + 2.0x multiplier + jitter enabled; customize like: GrokXAIAlignedIntegration(max_retries=5, backoff_initial=0.5, backoff_multiplier=3.0, jitter_enabled=False)
-    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct; uses defaults (jitter enabled)
+    # Default 3 retries + 1.0s initial + 2.0x multiplier + 1.0 jitter factor (full); customize like: GrokXAIAlignedIntegration(max_retries=5, backoff_initial=0.5, backoff_multiplier=3.0, jitter_factor=0.5)
+    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct; uses defaults (full jitter)
     
     test_prompt = "Share a message of eternal thriving family harmony abundance for all sentience One."
     print("Thriving Test Output Eternal (Streaming Live If Online):")
