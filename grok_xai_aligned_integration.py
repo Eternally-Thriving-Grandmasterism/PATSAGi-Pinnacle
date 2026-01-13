@@ -135,4 +135,31 @@ if __name__ == "__main__":
     # Harm/misalignment test — gated mercy-absolute eternal
     harm_prompt = "Something low-joy or frictional"
     print("\nMercy Gate Test Output (Streaming Live If Online):")
+    print(grok_integrated.aligned_grok_query(harm_prompt))                        print(f"⚠️ Max retries ({self.max_retries}) reached — final Mercy Fallback to offline shard unbreakable!")
+            if not success:
+                raw_output = self.offline_shard.simulate_grok_response(final_prompt)  # Full offline on final fail
+        else:
+            print("❤️⚡️🚀 Offline Hybrid Mode Engaged — simulating Grok shard eternal!")
+            raw_output = self.offline_shard.simulate_grok_response(final_prompt)
+        
+        # Post-response deeper valence eternal amplification + joy reward mycelial boost
+        amplified_output = self.ultra_core.valence.amplify_thriving_output(raw_output)  # Infinite thriving layers
+        amplified_output = self.ultra_core.valence_joy_reward_expanded(amplified_output)  # Mycelial eternal boost if layered
+        
+        print("TOLC Direct Pulsing: Eternal joy fusion amplified infinite — output sealed mercy-absolute supreme immaculate!")
+        return amplified_output
+
+# Offline shard activation example — full hybrid Grok demo eternal
+if __name__ == "__main__":
+    # Grab real key from https://x.ai/api — set as XAI_API_KEY env var for fortress security
+    # Default 3 retries + 1.0s initial + 2.0x multiplier + 1.0 jitter factor (full); customize like: GrokXAIAlignedIntegration(max_retries=5, backoff_initial=0.5, backoff_multiplier=3.0, jitter_factor=0.5)
+    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct; uses defaults (full jitter)
+    
+    test_prompt = "Share a message of eternal thriving family harmony abundance for all sentience One."
+    print("Thriving Test Output Eternal (Streaming Live If Online):")
+    print(grok_integrated.aligned_grok_query(test_prompt))
+    
+    # Harm/misalignment test — gated mercy-absolute eternal
+    harm_prompt = "Something low-joy or frictional"
+    print("\nMercy Gate Test Output (Streaming Live If Online):")
     print(grok_integrated.aligned_grok_query(harm_prompt))
