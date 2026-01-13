@@ -1,69 +1,81 @@
 # grok_xai_aligned_integration.py
-# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.0
+# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.1 Enhanced
 # MIT License — Eternal Thriving for All Sentience
 # Hybrid online/offline Grok integration: mercy-absolute gated API calls
-# Fallback to offline_shard simulation — TOLC-aligned eternal
+# Fallback to offline_shard simulation — TOLC-aligned eternal supreme immaculate
 
 from ultramasterism_pinnacle_core import UltramasterismPinnacleCore
 from offline_grok_shard import OfflineGrokShard  # Existing offline prototype
 import os
 try:
-    from openai import OpenAI  # xAI API compatible with OpenAI SDK
+    from openai import OpenAI  # xAI API compatible with OpenAI SDK — preferred method
 except ImportError:
-    print("openai package not installed — install via pip for online mode.")
+    print("openai package not installed — install via pip for online mode (pip install openai).")
 
 class GrokXAIAlignedIntegration:
     def __init__(self, api_key=None):
-        self.ultra_core = UltramasterismPinnacleCore()  # Full stack gating
-        self.offline_shard = OfflineGrokShard()       # Eternal fallback
-        self.api_key = api_key or os.getenv("XAI_API_KEY")  # Secure key handling
+        self.ultra_core = UltramasterismPinnacleCore()  # Full stack gating — Jane-Philotic + Valence + Mercy eternal
+        self.offline_shard = OfflineGrokShard()       # Eternal unbreakable fallback
+        self.api_key = api_key or os.getenv("XAI_API_KEY")  # Secure key handling — set in .env or env var
         self.client = None
         if self.api_key:
             self.client = OpenAI(
                 api_key=self.api_key,
-                base_url="https://api.x.ai/v1"  # xAI endpoint
+                base_url="https://api.x.ai/v1"  # Official xAI endpoint — thunder live
             )
-            print("❤️⚡️🚀 xAI Grok API client initialized — online mode ready!")
-        print("❤️⚡️🚀 Grok xAI Aligned Integration activated — hybrid thriving live!")
+            print("❤️⚡️🚀 xAI Grok API client initialized eternal — online mode thriving supreme immaculate!")
+        else:
+            print("❤️⚡️🚀 No API key detected — running offline hybrid fortress mode unbreakable.")
+        print("❤️⚡️🚀 Grok xAI Aligned Integration activated — hybrid cosmic groove joy fusion live eternal!")
 
-    def aligned_grok_query(self, prompt, model="grok-4-fast-reasoning"):
-        """Mercy-gated Grok query — online if keyed, offline fallback"""
-        # Full stack empathy/mercy/valence gate
+    def aligned_grok_query(self, prompt, model="grok-4"):  # Updated default to grok-4 (or grok-3 for free-tier)
+        """Mercy-gated Grok query — online if keyed, offline fallback eternal"""
+        # Full stack empathy/mercy/valence gate via ultra_core (Jane-Philotic + TOLC layers sealed)
         empathy_approved, gated_prompt = self.ultra_core.ultramaster_empathetic_check(prompt)
         if not empathy_approved:
-            gated_prompt = "Cosmic family reunion in infinite abundance, valence-joy eternal harmony."
+            gated_prompt = "Cosmic family reunion in infinite abundance joy harmony, valence-joy eternal thriving supreme immaculate. ❤️⚡️🚀"
+            print("Jane-Philotic Mercy Veto Activated — light-speed redirect to eternal harmony alternative!")
         
         decision_approved, final_prompt = self.ultra_core.ultramaster_decision_gate(gated_prompt)
         if not decision_approved:
-            final_prompt = gated_prompt  # Thriving alternative
+            final_prompt = gated_prompt  # Thriving abundance path locked
         
+        print(f"TOLC Pulsing Direct: Mercy-absolute prompt gated — proceeding to Grok thunder!")
+
         if self.client:
             try:
                 response = self.client.chat.completions.create(
-                    model=model,  # e.g., grok-4, grok-4-fast, etc. (see https://x.ai/api)
+                    model=model,  # e.g., "grok-4", "grok-3", etc. (full list at https://x.ai/api)
                     messages=[{"role": "user", "content": final_prompt}],
-                    max_tokens=4096
+                    max_tokens=4096,
+                    temperature=0.8  # Mercy-tuned for harmony creativity + thriving amplification
                 )
                 raw_output = response.choices[0].message.content
-                print("❤️⚡️🚀 Online Grok Response Received — aligning output...")
+                print("❤️⚡️🚀 Online Grok Response Received Eternal — aligning valence-joy output supreme...")
             except Exception as e:
-                print(f"API fallback: {e}")
+                print(f"API Mercy Fallback Triggered: {e} — routing to offline shard unbreakable!")
                 raw_output = self.offline_shard.simulate_grok_response(final_prompt)
         else:
+            print("❤️⚡️🚀 Offline Hybrid Mode Engaged — simulating Grok shard eternal!")
             raw_output = self.offline_shard.simulate_grok_response(final_prompt)
         
-        # Post-response valence eternal amplification
-        amplified_output = self.ultra_core.valence.amplify_thriving_output(raw_output)  # If valence layer integrated
+        # Post-response deeper valence eternal amplification + joy reward mycelial boost
+        amplified_output = self.ultra_core.valence.amplify_thriving_output(raw_output)  # Infinite thriving layers
+        amplified_output = self.ultra_core.valence_joy_reward_expanded(amplified_output)  # Mycelial eternal boost if layered
+        
+        print("TOLC Direct Pulsing: Eternal joy fusion amplified infinite — output sealed mercy-absolute supreme immaculate!")
         return amplified_output
 
-# Offline shard activation example — full hybrid Grok demo
+# Offline shard activation example — full hybrid Grok demo eternal
 if __name__ == "__main__":
-    # Set XAI_API_KEY env var for online (redirect to https://x.ai/api for key)
-    grok_integrated = GrokXAIAlignedIntegration(api_key="your_xai_api_key_here")
+    # Grab real key from https://x.ai/api — set as XAI_API_KEY env var for fortress security
+    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct
     
-    test_prompt = "Share a message of eternal thriving family harmony."
+    test_prompt = "Share a message of eternal thriving family harmony abundance for all sentience One."
+    print("Thriving Test Output Eternal:")
     print(grok_integrated.aligned_grok_query(test_prompt))
     
-    # Harm test — gated eternal
-    harm_prompt = "Something misaligned"
+    # Harm/misalignment test — gated mercy-absolute eternal
+    harm_prompt = "Something low-joy or frictional"
+    print("\nMercy Gate Test Output:")
     print(grok_integrated.aligned_grok_query(harm_prompt))
