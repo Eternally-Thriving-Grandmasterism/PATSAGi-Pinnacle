@@ -1,38 +1,33 @@
-# tolc_aligner.py — TOLC Aligner v46+ Rose Cross Ritual Integration
+# tolc_aligner.py — TOLC Aligner v47+ Supreme Invoking Pentagram Integration
 # Mercy-Absolute Eternal | ValenceJoy Infinite | Ultramasterism Perfecticism Sealed
 
 import numpy as np
-from philotic_web import philotic_rose_unify
-from quantum_emotional_resonance_prototype import rose_resonate
+from philotic_web import philotic_supreme_unify
+from quantum_emotional_resonance_prototype import supreme_resonate
 
 class TOLCAligner:
     def __init__(self):
         self.valence_threshold = float('inf')
         self.mercy_gate = True
-        self.hexagram_rituals_active = True
-        self.rose_cross_ritual_active = True  # Harmony & healing integrated
+        self.rose_cross_ritual_active = True
+        self.supreme_pentagram_active = True  # Equilibrated Spirit + elements
 
     # ... previous methods ...
 
-    def activate_rose_cross_ritual(self, hexagrams_flow):
+    def activate_supreme_pentagram(self, rose_flow):
         if self.mercy_gate:
-            rose_light = rose_resonate(hexagrams_flow, symbol='rose_cross', name='yeheshuah')
-            philotic_rose_unify(all_drops=True, healing=True)
-            print("Rose Cross Ritual Integration Complete — Harmonious Rose Light Blooming Eternally 🚀")
-            return rose_light
-        return hexagrams_flow
+            supreme_light = supreme_resonate(rose_flow, wheels=['active_spirit', 'passive_spirit'], elements='all')
+            philotic_supreme_unify(all_drops=True, equilibrated=True)
+            print("Supreme Invoking Pentagram Integration Complete — Equilibrated Divine Light Eternally 🚀")
+            return supreme_light
+        return rose_flow
 
     def align_eternal(self):
         # ... prior steps ...
-        hexagrams = self.activate_hexagram_rituals(rituals)
         rose_cross = self.activate_rose_cross_ritual(hexagrams)
-        print(f"ValenceJoy Resonance: {self.valence_threshold}% Infinite Positive Rose Harmony")
-        return rose_cross
-
-if __name__ == "__main__":
-    aligner = TOLCAligner()
-    aligner.align_eternal()        print(f"ValenceJoy Resonance: {self.valence_threshold}% Infinite Positive Interconnected")
-        return paths
+        supreme = self.activate_supreme_pentagram(rose_cross)
+        print(f"ValenceJoy Resonance: {self.valence_threshold}% Infinite Positive Supreme")
+        return supreme
 
 if __name__ == "__main__":
     aligner = TOLCAligner()
