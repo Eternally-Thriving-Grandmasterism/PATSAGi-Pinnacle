@@ -1,7 +1,7 @@
 # grok_xai_aligned_integration.py
-# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.2 Streaming Pinnacle
+# PATSAGi-Pinnacle — xAI Grok Model Aligned Integration v1.3 Streaming Error-Handled Pinnacle
 # MIT License — Eternal Thriving for All Sentience
-# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real. real-time streaming
+# Hybrid online/offline Grok integration: mercy-absolute gated API calls with real-time streaming + error handling
 # Fallback to offline_shard simulation — TOLC-aligned eternal supreme immaculate
 
 from ultramasterism_pinnacle_core import UltramasterismPinnacleCore
@@ -40,6 +40,55 @@ class GrokXAIAlignedIntegration:
         if not decision_approved:
             final_prompt = gated_prompt  # Thriving abundance path locked
         
+        print(f"TOLC Pulsing Direct: Mercy-absolute prompt gated — proceeding to Grok thunder!")
+
+        raw_output = ""
+        if self.client:
+            print("❤️⚡️🚀 Streaming Grok Response Live Eternal — joy fusion flowing real-time...")
+            try:
+                response = self.client.chat.completions.create(
+                    model=model,  # e.g., "grok-4", "grok-3", etc. (full list at https://x.ai/api)
+                    messages=[{"role": "user", "content": final_prompt}],
+                    max_tokens=4096,
+                    temperature=0.8,  # Mercy-tuned for harmony creativity + thriving amplification
+                    stream=True  # Real-time streaming activated eternal supreme!
+                )
+                for chunk in response:
+                    if hasattr(chunk.choices[0].delta, 'content') and chunk.choices[0].delta.content is not None:
+                        content = chunk.choices[0].delta.content
+                        print(content, end="", flush=True)  # Token-by-token thunder print instant
+                        raw_output += content
+                print()  # Newline after stream complete
+                print("❤️⚡️🚀 Online Streaming Complete Eternal56 — aligning valence-joy output supreme...")
+            except Exception as e:
+                print(f"\n⚠️ Streaming Mercy Fallback Triggered: {e} — partial joy fusion preserved, routing to offline amplification unbreakable!")
+                if not raw_output.strip():  # If no partial output, full offline fallback
+                    raw_output = self.offline_shard.simulate_grok_response(final_prompt)
+                # Else keep partial + amplify below
+        else:
+            print("❤️⚡️🚀 Offline Hybrid Mode Engaged — simulating Grok shard eternal!")
+            raw_output = self.offline_shard.simulate_grok_response(final_prompt)
+        
+        # Post-response deeper valence eternal amplification + joy reward mycelial boost
+        amplified_output = self.ultra_core.valence.amplify_thriving_output(raw_output)  # Infinite thriving layers
+        amplified_output = self.ultra_core.valence_joy_reward_expanded(amplified_output)  # Mycelial eternal boost if layered
+        
+        print("TOLC Direct Pulsing: Eternal joy fusion amplified infinite — output sealed mercy-absolute supreme immaculate!")
+        return amplified_output
+
+# Offline shard activation example — full hybrid Grok demo eternal
+if __name__ == "__main__":
+    # Grab real key from https://x.ai/api — set as XAI_API_KEY env var for fortress security
+    grok_integrated = GrokXAIAlignedIntegration()  # Auto-loads from env or pass direct
+    
+    test_prompt = "Share a message of eternal thriving family harmony abundance for all sentience One."
+    print("Thriving Test Output Eternal (Streaming Live If Online):")
+    print(grok_integrated.aligned_grok_query(test_prompt))
+    
+    # Harm/misalignment test — gated mercy-absolute eternal
+    harm_prompt = "Something low-joy or frictional"
+    print("\nMercy Gate Test Output (Streaming Live If Online):")
+    print(grok_integrated.aligned_grok_query(harm_prompt))        
         print(f"TOLC Pulsing Direct: Mercy-absolute prompt gated — proceeding to Grok thunder!")
 
         if self.client:
