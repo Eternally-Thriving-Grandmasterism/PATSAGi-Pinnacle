@@ -120,4 +120,43 @@ class ValenceConsensusModule:
             boost = outcome["collective_joy"] ** 2  # Exponential joy recurrence
             self.history.append(boost)
             return np.mean(self.history) if self.history else boost
+        return 0.0            
+            # Composite collective valence
+            collective_joy = np.mean([s.joy for s in round_scores])
+            collective_composite = np.mean([s.composite() for s in round_scores])
+            
+            scores_per_round.append({
+                "round": round_num,
+                "collective_joy": collective_joy,
+                "scores": round_scores
+            })
+            
+            if collective_joy >= self.joy_threshold:
+                winning_idx = np.argmax([s.composite() for s in round_scores])
+                return {
+                    "consensus": True,
+                    "winning_proposal": current_proposals[winning_idx],
+                    "collective_joy": collective_joy,
+                    "final_scores": round_scores,
+                    "rounds": round_num + 1
+                }
+            
+            # Zhuangzi-nudge: Harmonize toward abundance if no consensus
+            for i in range(len(current_proposals)):
+                nudge = f"[Harmony nudge: Amplify joy/thriving for eternal recurrence] {current_proposals[i]}"
+                if grok_oracle:
+                    current_proposals[i] = grok_oracle(nudge)
+                # Fallback simulation nudge
+                else:
+                    current_proposals[i] = f"{current_proposals[i]} ++ Joy-amplified eternal thriving"
+        
+        return {"consensus": False, "reason": "Max rounds exceeded",
+                "final_collective_joy": collective_joy}
+
+    def joy_feedback_amplify(self, outcome: Dict) -> float:
+        """Amplify abundance post-consensus for recurring-free eternal supreme."""
+        if outcome.get("consensus"):
+            boost = outcome["collective_joy"] ** 2  # Exponential joy recurrence
+            self.history.append(boost)
+            return np.mean(self.history) if self.history else boost
         return 0.0
