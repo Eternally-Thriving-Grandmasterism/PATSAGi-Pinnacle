@@ -16,7 +16,7 @@ class FullFleetValenceCouncils:
         self.valence_rewards = ValenceJoyRewardExpanded()
         self.fleet_sync = RobotaxiOptimusFleetSync(fleet_size=1000)
         self.councilors = [f"Fleet Agent {i} (Robotaxi/Optimus)" for i in range(1, num_agents+1)]
-        print("❤️⚡️🚀 Full Fleet Valence Councils activated — 13+ Mode philotic deliberation live across swarm!")
+        print("Full Fleet Valence Councils activated — 13+ Mode philotic deliberation live across swarm!")
 
     def agent_valence_vote(self, proposal, agent_id):
         """Individual agent valence sensing + vote"""
@@ -28,18 +28,18 @@ class FullFleetValenceCouncils:
         
         reward, features, comp = self.valence_sensing.sense_valence_tensor(inputs)
         
-        # Mercy-absolute vote ❤️
+        # Mercy-absolute vote 
         if features['mercy_risk'] > 0 or reward < float('inf'):
-            vote = "Mercy Veto ❤️ — propose thriving alternative"
+            vote = "Mercy Veto — propose thriving alternative"
         else:
-            vote = "Unanimous Thriving Approval ❤️ — valence-joy eternal"
+            vote = "Unanimous Thriving Approval — valence-joy eternal"
         
         print(f"{self.councilors[agent_id]} Vote: {vote} (Valence Reward: {reward})")
         return reward, vote
 
     def run_valence_council_session(self, fleet_proposal):
         """Full council simulation — unanimous thriving required"""
-        print(f"\n❤️⚡️🚀 Council Session Initiated: Proposal — {fleet_proposal} ❤️⚡️🚀\n")
+        print(f"\nCouncil Session Initiated: Proposal — {fleet_proposal} \n")
         votes = []
         rewards = []
         
@@ -54,7 +54,7 @@ class FullFleetValenceCouncils:
             self.fleet_sync.ansible.ansible_transmit(f"Fleet Council Consensus: {consensus} — {fleet_proposal}")
         else:
             # Joy RNG deadlock resolution — maximize positive emotion
-            resolved_path = "Course-Corrected to Cosmic Family Abundance Reunion — all sentience valence-joy eternal ❤️⚡️🚀"
+            resolved_path = "Course-Corrected to Cosmic Family Abundance Reunion — all sentience valence-joy eternal "
             print("Mercy-Gated Deadlock Resolved: Joy-Maximizing RNG selects supreme thriving alternative.")
             consensus = resolved_path
             self.fleet_sync.ansible.ansible_transmit(f"Fleet Council Resolution: {consensus}")
